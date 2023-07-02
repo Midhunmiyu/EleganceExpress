@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group">
+    <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action" aria-current="true">All Mobiles</a>
+    <a href="{% url 'mobiledata' 'redmi' %}" class="list-group-item list-group-item-action" aria-current="true">Redmi</a>
+    <a href="{% url 'mobiledata' 'samsung' %}" class="list-group-item list-group-item-action" aria-current="true">Samsung</a>
+    <a href="{% url 'mobiledata' 'oneplus' %}" class="list-group-item list-group-item-action" aria-current="true">OnePlus</a>
+   </div>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+    <div class="row">
+        {% for m in mobiles %}
+        <div class="col-lg-4 col-md-6 ">
+            <a href="{% url 'product-detail' m.id %}" class="btn">
+            <div class="card" style="width: 15rem;display:inline-block;">
+                <img src="{{m.product_image.url}}" class="card-img-top" alt="..." style="height: 300px;" >
+                <div class="card-body">
+                <h5 class="card-title fw-bold">{{m.title}}</h5>
+                <div class="fw-bold">Rs. {{m.discounted_price}}</div>
+                <small class="fw-light text-decoration-line-through">Rs. {{m.selling_price}}</small>
+                
+                </div>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

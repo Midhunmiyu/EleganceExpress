@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group">
+    <a href="{% url 'laptop' %}" class="list-group-item list-group-item-action" aria-current="true">All Laptops</a>
+    <a href="{% url 'laptopdata' 'lenovo' %}" class="list-group-item list-group-item-action" aria-current="true">Lenovo</a>
+    <a href="{% url 'laptopdata' 'hp' %}" class="list-group-item list-group-item-action" aria-current="true">Hp</a>
+    
+   </div>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+    <div class="row">
+        {% for lp in laptop %}
+        <div class="col-lg-4 col-md-6 ">
+            <a href="{% url 'product-detail' lp.id %}" class="btn">
+            <div class="card" style="width: 15rem;display:inline-block;">
+                <img src="{{lp.product_image.url}}" class="card-img-top" alt="..." style="height: 300px;" >
+                <div class="card-body">
+                <h5 class="card-title fw-bold">{{lp.title}}</h5>
+                <div class="fw-bold">Rs. {{lp.discounted_price}}</div>
+                <small class="fw-light text-decoration-line-through">Rs. {{lp.selling_price}}</small>
+                
+                </div>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

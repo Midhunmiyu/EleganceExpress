@@ -1,0 +1,44 @@
+{% extends 'app/adminbase.html' %}
+{% load static %}
+{%load crispy_forms_tags %}
+{% block content %}
+<h2 class="text-center my-5" >Placed Orders</h2><br>
+<div class="row justify-content-center ">
+    <div class="col-auto">
+        <table class="table table-info table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">SL.No</th>
+              <th scope="col">User</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Date of order</th>
+             
+              <th scope="col">Status</th>
+              <th scope="col">Update</th>
+              <th scope="col">Delete</th>
+
+            </tr>
+          </thead>
+          <tbody>
+          {%  for i in order %}
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{i.User}}</td>
+              <td>{{i.customer}}</td>
+              <td>{{i.product}}</td>
+              <td>{{i.quantity}}</td>
+              
+              <td>{{i.ordered_date}}</td>
+              <td>{{i.status}}</td>
+              <td><a href="{% url 'order_update' i.id %}"> <button type="button" class="btn btn-primary">UPDATE</button></a></td>
+              <td><a href="{% url 'order_delete' i.id %}"> <button type="button" class="btn btn-primary">DELETE</button></a></td>
+            </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
